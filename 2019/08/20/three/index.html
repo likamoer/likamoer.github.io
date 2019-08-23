@@ -10,6 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
@@ -170,11 +173,55 @@
       
       
         
+        <li class="menu-item menu-item-phone">
+      
+    
+
+    <a href="/phone/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>图片</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-music">
+      
+    
+
+    <a href="/music/" rel="section"><i class="menu-item-icon fa fa-fw fa-music"></i> <br>音乐</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-certificate"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
         <li class="menu-item menu-item-archives">
       
     
 
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-welfare">
+      
+    
+
+    <a href="/welfare/" rel="section"><i class="menu-item-icon fa fa-fw fa-coffee"></i> <br>福利</a>
 
   </li>
   </ul>
@@ -206,7 +253,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="likamoer">
-      <meta itemprop="description" content="华中科技大学09级，就职于腾讯SNG。擅长各项前端技能，深入研究移动端开发与前端性能。非专业视觉设计师。此为博客一枚。">
+      <meta itemprop="description" content="爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -238,6 +285,14 @@
             
           
 
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
           
 
         </div>
@@ -530,6 +585,14 @@ var material = new THREE.MeshLambertMaterial({
     
         
       
+        
+      
+        <div>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢阅读-------------</div>
+</div>
+      
+
+      
 
       <footer class="post-footer">
 
@@ -547,6 +610,10 @@ var material = new THREE.MeshLambertMaterial({
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/23/js-event/" rel="prev" title="两道面试题引发的思考">
+                  两道面试题引发的思考 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -596,14 +663,14 @@ var material = new THREE.MeshLambertMaterial({
       src="/images/avatar.png"
       alt="likamoer">
   <p class="site-author-name" itemprop="name">likamoer</p>
-  <div class="site-description motion-element" itemprop="description">华中科技大学09级，就职于腾讯SNG。擅长各项前端技能，深入研究移动端开发与前端性能。非专业视觉设计师。此为博客一枚。</div>
+  <div class="site-description motion-element" itemprop="description">爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!</div>
 </div>
   <nav class="site-state motion-element">
       <div class="site-state-item site-state-posts">
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -685,22 +752,15 @@ var material = new THREE.MeshLambertMaterial({
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">likamoer</span>
 </div>
+
+<!--
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
-
-        
-
-
-
-
-
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>-->
 
         
       </div>
@@ -765,5 +825,6 @@ var material = new THREE.MeshLambertMaterial({
   <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
 
 
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 </body>
 </html>
