@@ -342,7 +342,7 @@
 <h2 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h2><hr>
 <p>指向实例的没有,因为一个构造函数可以创建多个实例,但是原型指向构造函数确实有的,这就要讲到第三个属性– constructor, 每一个原型都有一个constructor属性指向对应的构造函数.</p>
 <p>为了验证这一点, 我们可以尝试:</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> <span class="params">()</span> <span class="comment">&#123;&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">console</span>.<span class="title">log</span><span class="params">(Person == Person.prototype.<span class="keyword">constructor</span>)</span> <span class="comment">// true</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person == Person.prototype.constructor) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>所以我们再更新一下指向图:<br><img src="/2019/08/26/proto/prototype3.png" alt></p>
 <p>综上, 我们已经得出: </p>
@@ -356,7 +356,7 @@
 <p>在这个栗子中,我们定义了一个Person 并且在他的原型对象上增加了一个name属性, 实例化了一个person, 并且给该实例添加了已个name属性,现在我们打印了实例的name, 能够获取到刚刚设置的name属性, 接下来, 我们删除了该name属性, 实例本身没有啦name属性, 但我们依然去打印实例属性的name值, 发现也可以打印出来,并且是构造函数的name属性值.这说明了 实例本身有的属性会覆盖其原型对象上的属性,但是本身没有的属性, 实例会沿着<strong>proto</strong>原型链去寻找上一层.<br>那么, 上一层中也没有,会怎么办? 原型的原型又是什么?</p>
 <h2 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h2><hr>
 <p>在前面我们已经讲到了, 原型那,是一个对象, 既然是对象,我们就可以使用最原始的方法去创建他,那就是:</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = new <span class="keyword">Object</span>()</span><br><span class="line">obj.<span class="keyword">name</span> = <span class="string">'likamoer'</span></span><br><span class="line">console.log(obj.<span class="keyword">name</span>) <span class="comment">// likamoer</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">obj.name = <span class="string">'likamoer'</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.name) <span class="comment">// likamoer</span></span><br></pre></td></tr></table></figure>
 
 <p>其实原型对象就是通过Objec()构造函数生成的, 结合之前所讲, 实例的<strong>proto</strong>指向的构造函数的原型(prototype), 所以我们再更新下图:<br><img src="/2019/08/26/proto/prototype4.png" alt></p>
 <h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><hr>
@@ -406,8 +406,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/26/scope/" rel="next" title="'scope'">
-                  <i class="fa fa-chevron-left"></i> 'scope'
+                <a href="/2019/08/26/scope/" rel="next" title="词法作用域与动态作用域">
+                  <i class="fa fa-chevron-left"></i> 词法作用域与动态作用域
                 </a>
               
             </div>
@@ -484,7 +484,9 @@
         
           
         
-        <span class="site-state-item-count">1</span>
+          
+        
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
         
       </div>

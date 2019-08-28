@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+  <meta name="description" content="作用域 作用域是指程序源代码当中变量的定义区域作用域规定了如何查找变量, 也就是确定当前执行代码对变量的访问权限而js采用的是词法作用域,也就是静态作用域. 静态作用域与动态作用域 因为javascript采用的是静态作用域, 函数的作用域在函数定义时就已经定义好啦;而与静态作用域相对的动态作用域, 函数的作用域是在函数运行的时候才定义的;举个栗子: 123456789var value = 1f">
+<meta name="keywords" content="原生js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="&#39;scope&#39;">
+<meta property="og:title" content="词法作用域与动态作用域">
 <meta property="og:url" content="//likamoer.me/2019/08/26/scope/index.html">
 <meta property="og:site_name" content="小新没蜡笔的Blog">
-<meta property="og:description" content="爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!">
+<meta property="og:description" content="作用域 作用域是指程序源代码当中变量的定义区域作用域规定了如何查找变量, 也就是确定当前执行代码对变量的访问权限而js采用的是词法作用域,也就是静态作用域. 静态作用域与动态作用域 因为javascript采用的是静态作用域, 函数的作用域在函数定义时就已经定义好啦;而与静态作用域相对的动态作用域, 函数的作用域是在函数运行的时候才定义的;举个栗子: 123456789var value = 1f">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T07:17:05.243Z">
+<meta property="og:updated_time" content="2019-08-28T03:03:47.170Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="&#39;scope&#39;">
-<meta name="twitter:description" content="爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!">
+<meta name="twitter:title" content="词法作用域与动态作用域">
+<meta name="twitter:description" content="作用域 作用域是指程序源代码当中变量的定义区域作用域规定了如何查找变量, 也就是确定当前执行代码对变量的访问权限而js采用的是词法作用域,也就是静态作用域. 静态作用域与动态作用域 因为javascript采用的是静态作用域, 函数的作用域在函数定义时就已经定义好啦;而与静态作用域相对的动态作用域, 函数的作用域是在函数运行的时候才定义的;举个栗子: 123456789var value = 1f">
   <link rel="alternate" href="/atom.xml" title="小新没蜡笔的Blog" type="application/atom+xml">
   <link rel="canonical" href="//likamoer.me/2019/08/26/scope/">
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title>'scope' | 小新没蜡笔的Blog</title>
+  <title>词法作用域与动态作用域 | 小新没蜡笔的Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -259,7 +259,7 @@
       <meta itemprop="name" content="小新没蜡笔的Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">'scope'
+        <h1 class="post-title" itemprop="name headline">词法作用域与动态作用域
 
           
         </h1>
@@ -277,6 +277,18 @@
 
               <time title="创建时间：2019-08-26 15:17:05" itemprop="dateCreated datePublished" datetime="2019-08-26T15:17:05+08:00">2019-08-26</time>
             </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 11:03:47" itemprop="dateModified" datetime="2019-08-28T11:03:47+08:00">2019-08-28</time>
+              </span>
+            
           
 
           
@@ -298,7 +310,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><hr>
+<p>作用域是指程序源代码当中变量的定义区域<br>作用域规定了如何查找变量, 也就是确定当前执行代码对变量的访问权限<br>而js采用的是词法作用域,也就是静态作用域.</p>
+<h2 id="静态作用域与动态作用域"><a href="#静态作用域与动态作用域" class="headerlink" title="静态作用域与动态作用域"></a>静态作用域与动态作用域</h2><hr>
+<p>因为javascript采用的是静态作用域, 函数的作用域在函数定义时就已经定义好啦;<br>而与静态作用域相对的动态作用域, 函数的作用域是在函数运行的时候才定义的;<br>举个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value = <span class="number">2</span></span><br><span class="line">    foo()</span><br><span class="line">&#125;</span><br><span class="line">bar() <span class="comment">// 结果是?</span></span><br></pre></td></tr></table></figure>
+
+<p>假设js采用的是静态作用域, 那么分析一下过程:<br>执行foo函数, 执行foo函数的时候,先从foo函数内部查找是否有局部变量value,如果没有,就往上一层查找, 那就是1,所以结果会打印出1<br>假设js采用的是动态作用域, 那么分析一下过程:<br>执行foo函数,依然是从内部开始查找value, 如果没有, 就从调用函数的作用域开始查询,也就是bar内查询是否存在value, 找到了 value = 2 所以会打印2</p>
+<p><em>综上所述</em><br>因为我们知道js是静态作用域, 所以打印出1,</p>
+<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><hr>
+<p>那作为一枚优秀的程序员, 肯定也想知道什么是动态作用域<br>简单来说, 动态,就是根据调用它的位置所在的执行上下文,也就是作用域来确定;</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><hr>
+<p>最后让我们来看一个思考的题目, 更容易理解:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkScope() <span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line">checkScope()()</span><br></pre></td></tr></table></figure>
+
+<p>猜一猜两段代码会输出什么?<br>直接公布答案: 两段代码都会打印出 <em>local scope</em><br>原因很简单: js采用的是静态作用域, 函数的作用域取决于函数创建的位置;<br>引用&lt;&lt;js权威指南里面的一句话&gt;&gt;</p>
+<blockquote>
+<p>javascript函数的执行,应用到了作用域链, 这个作用域链是在函数创建的时候创建的.嵌套的函数f()是定义在这个作用域链里, 所以 其中的scope变量一定是局部变量,不管何时何地执行f(), 依然有效;</p>
+</blockquote>
+
     </div>
 
     
@@ -316,6 +348,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/原生js/" rel="tag"><i class="fa fa-tag"></i> 原生js</a>
+            
+          </div>
+        
 
         
 
@@ -366,8 +407,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -395,7 +445,9 @@
         
           
         
-        <span class="site-state-item-count">1</span>
+          
+        
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
         
       </div>
@@ -447,6 +499,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态作用域与动态作用域"><span class="nav-number">2.</span> <span class="nav-text">静态作用域与动态作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态作用域"><span class="nav-number">3.</span> <span class="nav-text">动态作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题"><span class="nav-number">4.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>

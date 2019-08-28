@@ -327,7 +327,7 @@
 <h2 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h2><hr>
 <p>指向实例的没有,因为一个构造函数可以创建多个实例,但是原型指向构造函数确实有的,这就要讲到第三个属性– constructor, 每一个原型都有一个constructor属性指向对应的构造函数.</p>
 <p>为了验证这一点, 我们可以尝试:</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> <span class="params">()</span> <span class="comment">&#123;&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">console</span>.<span class="title">log</span><span class="params">(Person == Person.prototype.<span class="keyword">constructor</span>)</span> <span class="comment">// true</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Person == Person.prototype.constructor) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>所以我们再更新一下指向图:<br><img src="/2019/08/26/proto/prototype3.png" alt></p>
 <p>综上, 我们已经得出: </p>
@@ -341,7 +341,7 @@
 <p>在这个栗子中,我们定义了一个Person 并且在他的原型对象上增加了一个name属性, 实例化了一个person, 并且给该实例添加了已个name属性,现在我们打印了实例的name, 能够获取到刚刚设置的name属性, 接下来, 我们删除了该name属性, 实例本身没有啦name属性, 但我们依然去打印实例属性的name值, 发现也可以打印出来,并且是构造函数的name属性值.这说明了 实例本身有的属性会覆盖其原型对象上的属性,但是本身没有的属性, 实例会沿着<strong>proto</strong>原型链去寻找上一层.<br>那么, 上一层中也没有,会怎么办? 原型的原型又是什么?</p>
 <h2 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h2><hr>
 <p>在前面我们已经讲到了, 原型那,是一个对象, 既然是对象,我们就可以使用最原始的方法去创建他,那就是:</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = new <span class="keyword">Object</span>()</span><br><span class="line">obj.<span class="keyword">name</span> = <span class="string">'likamoer'</span></span><br><span class="line">console.log(obj.<span class="keyword">name</span>) <span class="comment">// likamoer</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">obj.name = <span class="string">'likamoer'</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.name) <span class="comment">// likamoer</span></span><br></pre></td></tr></table></figure>
 
 <p>其实原型对象就是通过Objec()构造函数生成的, 结合之前所讲, 实例的<strong>proto</strong>指向的构造函数的原型(prototype), 所以我们再更新下图:<br><img src="/2019/08/26/proto/prototype4.png" alt></p>
 <h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><hr>
@@ -398,7 +398,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/26/scope/" class="post-title-link" itemprop="url">'scope'</a>
+            <a href="/2019/08/26/scope/" class="post-title-link" itemprop="url">词法作用域与动态作用域</a>
           
         </h1>
 
@@ -416,6 +416,18 @@
               <time title="创建时间：2019-08-26 15:17:05" itemprop="dateCreated datePublished" datetime="2019-08-26T15:17:05+08:00">2019-08-26</time>
             </span>
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 11:03:47" itemprop="dateModified" datetime="2019-08-28T11:03:47+08:00">2019-08-28</time>
+              </span>
+            
+          
 
           
 
@@ -428,7 +440,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><hr>
+<p>作用域是指程序源代码当中变量的定义区域<br>作用域规定了如何查找变量, 也就是确定当前执行代码对变量的访问权限<br>而js采用的是词法作用域,也就是静态作用域.</p>
+<h2 id="静态作用域与动态作用域"><a href="#静态作用域与动态作用域" class="headerlink" title="静态作用域与动态作用域"></a>静态作用域与动态作用域</h2><hr>
+<p>因为javascript采用的是静态作用域, 函数的作用域在函数定义时就已经定义好啦;<br>而与静态作用域相对的动态作用域, 函数的作用域是在函数运行的时候才定义的;<br>举个栗子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value = <span class="number">2</span></span><br><span class="line">    foo()</span><br><span class="line">&#125;</span><br><span class="line">bar() <span class="comment">// 结果是?</span></span><br></pre></td></tr></table></figure>
+
+<p>假设js采用的是静态作用域, 那么分析一下过程:<br>执行foo函数, 执行foo函数的时候,先从foo函数内部查找是否有局部变量value,如果没有,就往上一层查找, 那就是1,所以结果会打印出1<br>假设js采用的是动态作用域, 那么分析一下过程:<br>执行foo函数,依然是从内部开始查找value, 如果没有, 就从调用函数的作用域开始查询,也就是bar内查询是否存在value, 找到了 value = 2 所以会打印2</p>
+<p><em>综上所述</em><br>因为我们知道js是静态作用域, 所以打印出1,</p>
+<h2 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h2><hr>
+<p>那作为一枚优秀的程序员, 肯定也想知道什么是动态作用域<br>简单来说, 动态,就是根据调用它的位置所在的执行上下文,也就是作用域来确定;</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><hr>
+<p>最后让我们来看一个思考的题目, 更容易理解:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkScope() <span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line">checkScope()()</span><br></pre></td></tr></table></figure>
+
+<p>猜一猜两段代码会输出什么?<br>直接公布答案: 两段代码都会打印出 <em>local scope</em><br>原因很简单: js采用的是静态作用域, 函数的作用域取决于函数创建的位置;<br>引用&lt;&lt;js权威指南里面的一句话&gt;&gt;</p>
+<blockquote>
+<p>javascript函数的执行,应用到了作用域链, 这个作用域链是在函数创建的时候创建的.嵌套的函数f()是定义在这个作用域链里, 所以 其中的scope变量一定是局部变量,不管何时何地执行f(), 依然有效;</p>
+</blockquote>
+
         
       
     </div>
@@ -1608,7 +1640,9 @@ var material = new THREE.MeshLambertMaterial({
         
           
         
-        <span class="site-state-item-count">1</span>
+          
+        
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
         
       </div>
