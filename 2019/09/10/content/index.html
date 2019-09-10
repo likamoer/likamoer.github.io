@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="前言 对于每个执行上下文, 都有三个重要属性: 变量对象() 作用域链(scope chain) this    变量对象 创建变量对象的过程 变量对象是与执行上下文相关的数据作用域, 存储了在上下文中定义的变量和函数声明; 不同执行上下文中的变量对象稍有不同, 全局上下文和函数上下文中的变量对象;  全局上下文我们先了解一下 什么叫全局上下文:  全局对象是预定义的对象, 作为javascrip">
+<meta name="keywords" content="content">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js变量对象">
+<meta property="og:url" content="//likamoer.me/2019/09/10/content/index.html">
+<meta property="og:site_name" content="小新没蜡笔的Blog">
+<meta property="og:description" content="前言 对于每个执行上下文, 都有三个重要属性: 变量对象() 作用域链(scope chain) this    变量对象 创建变量对象的过程 变量对象是与执行上下文相关的数据作用域, 存储了在上下文中定义的变量和函数声明; 不同执行上下文中的变量对象稍有不同, 全局上下文和函数上下文中的变量对象;  全局上下文我们先了解一下 什么叫全局上下文:  全局对象是预定义的对象, 作为javascrip">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-10T07:13:32.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js变量对象">
+<meta name="twitter:description" content="前言 对于每个执行上下文, 都有三个重要属性: 变量对象() 作用域链(scope chain) this    变量对象 创建变量对象的过程 变量对象是与执行上下文相关的数据作用域, 存储了在上下文中定义的变量和函数声明; 不同执行上下文中的变量对象稍有不同, 全局上下文和函数上下文中的变量对象;  全局上下文我们先了解一下 什么叫全局上下文:  全局对象是预定义的对象, 作为javascrip">
+  <link rel="alternate" href="/atom.xml" title="小新没蜡笔的Blog" type="application/atom+xml">
+  <link rel="canonical" href="//likamoer.me/2019/09/10/content/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>js变量对象 | 小新没蜡笔的Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container">
+    <div class="headband">
+    <a href="https://github.com/likamoer"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小新没蜡笔的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">遍历山河, 人间值得</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-phone">
+      
+    
+
+    <a href="/phone/" rel="section"><i class="menu-item-icon fa fa-fw fa-image"></i> <br>图片</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-music">
+      
+    
+
+    <a href="/music/" rel="section"><i class="menu-item-icon fa fa-fw fa-music"></i> <br>音乐</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-certificate"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-welfare">
+      
+    
+
+    <a href="/welfare/" rel="section"><i class="menu-item-icon fa fa-fw fa-coffee"></i> <br>福利</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="//likamoer.me/2019/09/10/content/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="likamoer">
+      <meta itemprop="description" content="爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小新没蜡笔的Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">js变量对象
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 14:06:16 / 修改时间：15:13:32" itemprop="dateCreated datePublished" datetime="2019-09-10T14:06:16+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>对于每个执行上下文, 都有三个重要属性:<ul>
+<li>变量对象()</li>
+<li>作用域链(scope chain)</li>
+<li>this</li>
+</ul>
+</li>
+</ul>
+<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><ul>
+<li>创建变量对象的过程</li>
+<li>变量对象是与执行上下文相关的数据作用域, 存储了在上下文中定义的变量和函数声明;</li>
+<li>不同执行上下文中的变量对象稍有不同, 全局上下文和函数上下文中的变量对象;</li>
+</ul>
+<h2 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h2><p>我们先了解一下 什么叫<em>全局上下文</em>:</p>
+<blockquote>
+<p>全局对象是预定义的对象, 作为javascript的全局函数和全局属性的占位符. 通过使用全局对象,可以访问所有的全局预定义属性, 函数, 和对象.<br>在顶层javascript代码中, 可以用关键词this引用全局对象. 因为全局对象是作用域链的头这意味着所有非限定的变量和函数名都会作为该对象的属性来查询</p>
+<ul>
+<li>例如在javascript中使用parseInt函数,它引用的是全局对象的parseInt属性, 全局对象是作用域链的头, 这意味着在顶层javascript代码中申明的所有变量,都将成为全局对象的属性.</li>
+</ul>
+</blockquote>
+<ol>
+<li><p>可以通过this引用, 在javascript中, 全局对象就是window对象;</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局对象是由Object构造函数实例化的一个对象</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>预定义了一堆函数加对象加属性</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(Math.<span class="built_in">ceil</span>())</span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">this</span>.Math.<span class="built_in">ceil</span>())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>作为全局变量的宿主</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = <span class="number">1</span></span><br><span class="line">console.log(this.a) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>js中, 全局对象指向window自身</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = <span class="number">1</span></span><br><span class="line">console.log(window.a)</span><br><span class="line">this<span class="selector-class">.window</span><span class="selector-class">.b</span> = <span class="number">2</span></span><br><span class="line">console.log(this.b) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><em>总结一句话: 全局上下文中的变量对象就是全局对象呐！</em></p>
+<h2 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h2><hr>
+<p>在函数上下文中, 我们用活动对象来表示变量对象;<br>活动对象和变量对象其实是一个东西, 只是变量对象是规范上的或者说是引擎上实现的,不可以在javascript环境中去访问, 只有当进入一个执行上下文中, 这个执行环境上下文中的对象才被激活,, 所以才会叫activation object,而只有被激活的变量对象,也就是活动对象上的各种属性才能被访问;</p>
+<p>活动对象是在进入函数上下文时刻被创建, 他通过函数的arguments属性初始化.arguments属性值是Arguments对象;</p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><hr>
+<p>执行上下文的代码会分成两个部分, 两个阶段做处理: 分析和执行, 我们也可以叫做:</p>
+<ul>
+<li>进入执行上下文</li>
+<li>代码执行</li>
+</ul>
+<h3 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h3><p>当进入执行上下文的时候, 这时候还没有执行代码,<br>变量对象会包括: </p>
+<ol>
+<li>函数的所有形参(如果是函数上下文)<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为 undefined</li>
+</ul>
+</li>
+<li>函数声明<ul>
+<li>由名称和对应值（函数对象(function-object)）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li>变量声明<ul>
+<li>由名称和对应值（undefined）组成一个变量对象的属性被创建；</li>
+<li>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性<br>举个栗子:<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> d = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  b = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<p>在进入执行上下文后，这时候的 AO 是：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    <span class="keyword">argument</span><span class="variable">s:</span> &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">        length: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="variable">a:</span> <span class="number">1</span>,</span><br><span class="line">    <span class="variable">b:</span> undefined,</span><br><span class="line">    <span class="keyword">c</span>: reference <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span>&#123;&#125;,</span></span><br><span class="line">    d: undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h2><p>在代码执行阶段，会顺序执行代码，根据代码，修改变量对象的值<br>还是上面的例子，当代码执行完后，这时候的 AO 是：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    <span class="keyword">argument</span><span class="variable">s:</span> &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">        length: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="variable">a:</span> <span class="number">1</span>,</span><br><span class="line">    <span class="variable">b:</span> <span class="number">3</span>,</span><br><span class="line">    <span class="keyword">c</span>: reference <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span>&#123;&#125;,</span></span><br><span class="line">    d: reference <span class="keyword">to</span> FunctionExpression <span class="string">"d"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里变量对象的创建过程就介绍完了，让我们简洁的总结我们上述所说：</p>
+<ol>
+<li>全局上下文的变量对象初始化是全局对象</li>
+<li>函数上下文的变量对象初始化只包括 Arguments 对象</li>
+<li>在进入执行上下文时会给变量对象添加形参、函数声明、变量声明等初始的属性值</li>
+<li>在代码执行阶段，会再次修改变量对象的属性值</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+      
+        <div>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-heart"></i>感谢阅读-------------</div>
+</div>
+      
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/content/" rel="tag"><i class="fa fa-tag"></i> content</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/26/proto/" rel="next" title="JavaScript底层原理 -- 原型和原型链的认识">
+                  <i class="fa fa-chevron-left"></i> JavaScript底层原理 -- 原型和原型链的认识
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="likamoer">
+  <p class="site-author-name" itemprop="name">likamoer</p>
+  <div class="site-description motion-element" itemprop="description">爱折腾的前端码农一枚, 爱好广泛, 不喜欢敲代码, 纯属为了生活,在前端可视化方面有一定的研究,追随前端技术,将前端折腾到底!!!</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://juejin.im/user/5a3bb0c0f265da43085e33b1" title="Juejin &rarr; https://juejin.im/user/5a3bb0c0f265da43085e33b1" rel="noopener" target="_blank"><i class="fa fa-fw fa-legal"></i>Juejin</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/likamoer" title="GitHub &rarr; https://github.com/likamoer" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:li_hx214@163.com" title="E-Mail &rarr; mailto:li_hx214@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量对象"><span class="nav-number">2.</span> <span class="nav-text">变量对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局上下文"><span class="nav-number">3.</span> <span class="nav-text">全局上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数上下文"><span class="nav-number">4.</span> <span class="nav-text">函数上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行过程"><span class="nav-number">5.</span> <span class="nav-text">执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入执行上下文"><span class="nav-number">5.1.</span> <span class="nav-text">进入执行上下文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码执行"><span class="nav-number">6.</span> <span class="nav-text">代码执行</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">likamoer</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>-->
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>

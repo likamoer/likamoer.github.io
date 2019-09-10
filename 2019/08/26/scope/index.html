@@ -322,9 +322,9 @@
 <p>那作为一枚优秀的程序员, 肯定也想知道什么是动态作用域<br>简单来说, 动态,就是根据调用它的位置所在的执行上下文,也就是作用域来确定;</p>
 <h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><hr>
 <p>最后让我们来看一个思考的题目, 更容易理解:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkScope() <span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkScope() <span class="comment">//</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line">checkScope()()</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line">checkScope()()</span><br></pre></td></tr></table></figure>
 
 <p>猜一猜两段代码会输出什么?<br>直接公布答案: 两段代码都会打印出 <em>local scope</em><br>原因很简单: js采用的是静态作用域, 函数的作用域取决于函数创建的位置;<br>引用&lt;&lt;js权威指南里面的一句话&gt;&gt;</p>
 <blockquote>
@@ -432,7 +432,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -447,7 +447,9 @@
         
           
         
-        <span class="site-state-item-count">2</span>
+          
+        
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
         
       </div>
